@@ -528,9 +528,9 @@ DFHack::command_result GetItemList(DFHack::color_ostream &stream, const DFHack::
         case df::enums::item_type::GEM:
         case df::enums::item_type::SMALLGEM:
         {
-            for (int i = 0; i < world->raws.descriptors.shapes.size(); i++)
+            for (int i = 0; i < world->raws.language.shapes.size(); i++)
             {
-                auto shape = world->raws.descriptors.shapes[i];
+                auto shape = world->raws.language.shapes[i];
                 if (shape->gems_use.whole == 0)
                     continue;
                 mat_def = out->add_material_list();
@@ -609,10 +609,6 @@ DFHack::command_result GetItemList(DFHack::color_ostream &stream, const DFHack::
                     for (int j = 0; j < instrument->pieces.size(); j++)
                     {
                         auto piece = send_instrument->add_pieces();
-                        piece->set_type(instrument->pieces[j]->type);
-                        piece->set_id(instrument->pieces[j]->id);
-                        piece->set_name(DF2UTF(instrument->pieces[j]->name));
-                        piece->set_name_plural(DF2UTF(instrument->pieces[j]->name_plural));
                     }
                     send_instrument->set_pitch_range_min(instrument->pitch_range_min);
                     send_instrument->set_pitch_range_max(instrument->pitch_range_max);
@@ -651,8 +647,6 @@ DFHack::command_result GetItemList(DFHack::color_ostream &stream, const DFHack::
                     for (int j = 0; j < instrument->registers.size(); j++)
                     {
                         auto reg = send_instrument->add_registers();
-                        reg->set_pitch_range_min(instrument->registers[j]->pitch_range_min);
-                        reg->set_pitch_range_max(instrument->registers[j]->pitch_range_max);
                     }
                     send_instrument->set_description(DF2UTF(instrument->description));
                     break;
